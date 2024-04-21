@@ -1,0 +1,53 @@
+---
+# Source: fluxargo-metahelm/templates/namespace.yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: novalues
+  labels:
+    helm.sh/chart: fluxargo-metahelm-0.1.0
+    app.kubernetes.io/managed-by: Helm
+---
+# Source: fluxargo-metahelm/templates/application.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: novalues
+  namespace: argo-cd
+  labels:
+    helm.sh/chart: fluxargo-metahelm-0.1.0
+    app.kubernetes.io/managed-by: Helm
+spec:
+  project: default
+  destination:
+    name: in-cluster
+    namespace: novalues
+  source:
+    chart: novalues/chart
+    repoURL: https://novalues_repourl
+    targetRevision: 1.2.3
+    helm:
+      releaseName: novalues
+---
+# Source: fluxargo-metahelm/templates/helmrelease.yaml
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: novalues
+  namespace: flux-system
+  labels:
+    helm.sh/chart: fluxargo-metahelm-0.1.0
+    app.kubernetes.io/managed-by: Helm
+spec:
+  releaseName: novalues
+  targetNamespace: novalues
+  interval: 10m
+  timeout: 5m
+  suspend: false
+  chart:
+    spec:
+      chart: novalues/chart
+      version: 1.2.3
+      sourceRef:
+        kind: HelmRepository
+        name: novalues

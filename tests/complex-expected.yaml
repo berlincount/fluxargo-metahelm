@@ -1,0 +1,59 @@
+---
+# Source: fluxargo-metahelm/templates/namespace.yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: alternate_namespace
+  labels:
+    helm.sh/chart: fluxargo-metahelm-0.1.0
+    app.kubernetes.io/managed-by: Helm
+---
+# Source: fluxargo-metahelm/templates/application.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: alternate_application_name
+  namespace: alternate_argo-cd
+  labels:
+    helm.sh/chart: fluxargo-metahelm-0.1.0
+    app.kubernetes.io/managed-by: Helm
+spec:
+  project: alternate_project
+  destination:
+    server: https://kubernetes_cluster_url
+    namespace: alternate_namespace
+  source:
+    repoURL: https://complex_repourl
+    path: complex/chart
+    targetRevision: complex_revision
+    helm:
+      releaseName: complex
+      valuesObject:
+        auth:
+          existingSecret: complex
+---
+# Source: fluxargo-metahelm/templates/helmrelease.yaml
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: alternate_helmrelease_name
+  namespace: alternate_flux-system
+  labels:
+    helm.sh/chart: fluxargo-metahelm-0.1.0
+    app.kubernetes.io/managed-by: Helm
+spec:
+  releaseName: alternate_releasename
+  targetNamespace: alternate_namespace
+  interval: 123m
+  timeout: 654m
+  suspend: false
+  chart:
+    spec:
+      chart: complex/chart
+      sourceRef:
+        kind: GitRepository
+        name: complex_reponame
+      interval: 5m
+  values:
+    auth:
+      existingSecret: complex

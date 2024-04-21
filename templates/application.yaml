@@ -1,0 +1,11 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ include "fluxargo-metahelm.argocd_name" . }}
+  namespace: {{ include "fluxargo-metahelm.argocd_namespace" . }}
+  labels:
+    {{- include "fluxargo-metahelm.labels" . | nindent 4 }}
+spec:
+  project: {{ include "fluxargo-metahelm.argocd_project" . }}
+  destination: {{- include "fluxargo-metahelm.argocd_destination" . | nindent 4 }}
+{{- include "fluxargo-metahelm.argocd_source" . | nindent 2 }}

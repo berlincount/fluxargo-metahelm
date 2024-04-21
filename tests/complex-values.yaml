@@ -1,0 +1,23 @@
+namespace: alternate_namespace
+
+sourcetype: gitrepo
+sourcerepo: complex_reponame
+sourceurl: https://complex_repourl
+sourcechart: complex/chart
+sourcerevision: complex_revision
+sourceinterval: 5m
+
+argocd_name: alternate_application_name
+argocd_namespace: alternate_argo-cd
+argocd_project: alternate_project
+argocd_destination: https://kubernetes_cluster_url
+
+flux_name: alternate_helmrelease_name
+flux_namespace: alternate_flux-system
+flux_releasename: alternate_releasename
+flux_interval: 123m
+flux_timeout: 654m
+
+values:
+  auth:
+    existingSecret: complex

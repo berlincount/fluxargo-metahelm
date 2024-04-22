@@ -1,6 +1,0 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: {{ include "fluxargo-metahelm.namespace" . }}
-  labels:
-    {{- include "fluxargo-metahelm.labels" . | nindent 4 }}

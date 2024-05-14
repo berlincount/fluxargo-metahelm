@@ -1,0 +1,5 @@
+sourcerepo: ocisimple
+sourceurl: oci://ocisimple_repourl
+sourcechart: ocisimple/chart
+
+flux_repo_create: true

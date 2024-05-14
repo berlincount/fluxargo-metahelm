@@ -3,7 +3,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: simple
+  name: gittag
   namespace: argocd
   labels:
     helm.sh/chart: fluxargo-metahelm-0.2.0
@@ -12,52 +12,53 @@ spec:
   project: default
   destination:
     name: in-cluster
-    namespace: simple
+    namespace: gittag
   source:
-    chart: simple/chart
-    repoURL: https://simple_repourl
+    repoURL: https://gittag_repourl
+    path: gittag/chart
     targetRevision: "1.2.3"
     helm:
-      releaseName: simple
+      releaseName: gittag
       valuesObject:
         auth:
-          existingSecret: simple
+          existingSecret: gittag
+---
+# Source: fluxargo-metahelm/templates/gitrepo.yaml
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: gittag
+  namespace: flux-system
+  labels:
+    helm.sh/chart: fluxargo-metahelm-0.2.0
+    app.kubernetes.io/managed-by: Helm
+spec:
+  interval: 15m
+  timeout: 5m
+  ref:
+    tag: "1.2.3"
+  url: https://gittag_repourl
 ---
 # Source: fluxargo-metahelm/templates/helmrelease.yaml
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
-  name: simple
+  name: gittag
   namespace: flux-system
   labels:
     helm.sh/chart: fluxargo-metahelm-0.2.0
     app.kubernetes.io/managed-by: Helm
 spec:
-  releaseName: simple
-  targetNamespace: simple
+  releaseName: gittag
+  targetNamespace: gittag
   interval: 10m
   suspend: false
   chart:
     spec:
-      chart: simple/chart
-      version: "1.2.3"
+      chart: gittag/chart
       sourceRef:
-        kind: HelmRepository
-        name: simple
+        kind: GitRepository
+        name: gittag
   values:
     auth:
-      existingSecret: simple
----
-# Source: fluxargo-metahelm/templates/helmrepo.yaml
-apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: HelmRepository
-metadata:
-  name: simple
-  namespace: flux-system
-  labels:
-    helm.sh/chart: fluxargo-metahelm-0.2.0
-    app.kubernetes.io/managed-by: Helm
-spec:
-  provider: generic
-  interval: 10m
-  url: https://simple_repourl
+      existingSecret: gittag

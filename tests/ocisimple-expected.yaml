@@ -3,7 +3,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: novalues
+  name: ocisimple
   namespace: argocd
   labels:
     helm.sh/chart: fluxargo-metahelm-0.2.0
@@ -12,46 +12,42 @@ spec:
   project: default
   destination:
     name: in-cluster
-    namespace: novalues
+    namespace: ocisimple
   source:
-    chart: novalues/chart
-    repoURL: https://novalues_repourl
-    targetRevision: "1.2.3"
+    chart: ocisimple/chart
+    repoURL: ocisimple_repourl
     helm:
-      releaseName: novalues
+      releaseName: ocisimple
 ---
 # Source: fluxargo-metahelm/templates/helmrelease.yaml
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
-  name: novalues
+  name: ocisimple
   namespace: flux-system
   labels:
     helm.sh/chart: fluxargo-metahelm-0.2.0
     app.kubernetes.io/managed-by: Helm
 spec:
-  releaseName: novalues
-  targetNamespace: novalues
+  releaseName: ocisimple
+  targetNamespace: ocisimple
   interval: 10m
   suspend: false
   chart:
     spec:
-      chart: novalues/chart
-      version: "1.2.3"
-      sourceRef:
-        kind: HelmRepository
-        name: novalues
+      chartRef:
+        kind: OCIRepository
+        name: ocisimple
 ---
-# Source: fluxargo-metahelm/templates/helmrepo.yaml
+# Source: fluxargo-metahelm/templates/ocirepo.yaml
 apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: HelmRepository
+kind: OCIRepository
 metadata:
-  name: novalues
+  name: ocisimple
   namespace: flux-system
   labels:
     helm.sh/chart: fluxargo-metahelm-0.2.0
     app.kubernetes.io/managed-by: Helm
 spec:
-  provider: generic
   interval: 10m
-  url: https://novalues_repourl
+  url: oci://ocisimple_repourl

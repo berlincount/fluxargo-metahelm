@@ -1,0 +1,15 @@
+sourcetype: gitrepo
+sourcerepo: gittag
+sourceurl: https://gittag_repourl
+sourcechart: gittag/chart
+sourcereftype: tag
+sourcerevision: 1.2.3
+
+flux_repo_create: true
+flux_repo_interval: 15m
+flux_repo_timeout: 5m
+
+values:
+
+  auth:
+    existingSecret: gittag

@@ -1,4 +1,4 @@
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
   name: {{ include "fluxargo-metahelm.flux_name" . }}
@@ -8,8 +8,10 @@ metadata:
 spec:
   releaseName: {{ include "fluxargo-metahelm.flux_releasename" . }}
   targetNamespace: {{ include "fluxargo-metahelm.namespace" . }}
-  interval: {{ include "fluxargo-metahelm.flux_interval" . }}
-  timeout: {{ include "fluxargo-metahelm.flux_timeout" . }}
-  suspend: {{ include "fluxargo-metahelm.flux_suspend" . }}
-{{- include "fluxargo-metahelm.flux_chart" . | nindent 2 }}
-{{- include "fluxargo-metahelm.flux_values" . | nindent 2 }}
+  interval: {{ include "fluxargo-metahelm.flux_release_interval" . }}
+{{- if .Values.flux_release_timeout }}
+  timeout: {{ .Values.flux_release_timeout }}
+{{- end }}
+  suspend: {{ include "fluxargo-metahelm.flux_release_suspend" . }}
+{{- include "fluxargo-metahelm.flux_chart" . | nindent 2 -}}
+{{- include "fluxargo-metahelm.flux_values" . | nindent 2 -}}

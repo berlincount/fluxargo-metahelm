@@ -8,4 +8,4 @@ metadata:
 spec:
   project: {{ include "fluxargo-metahelm.argocd_project" . }}
   destination: {{- include "fluxargo-metahelm.argocd_destination" . | nindent 4 }}
-{{- include "fluxargo-metahelm.argocd_source" . | nindent 2 }}
+{{- include "fluxargo-metahelm.argocd_source" . | nindent 2 -}}

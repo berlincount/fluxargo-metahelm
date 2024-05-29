@@ -1,5 +1,5 @@
 {{- if eq .Values.sourcetype "helmrepo" -}}
-apiVersion: source.toolkit.fluxcd.io/v1beta2
+apiVersion: source.toolkit.fluxcd.io/{{ include "fluxargo-metahelm.flux_apiversion_helmrepository" . }}
 kind: HelmRepository
 metadata:
   name: {{ .Values.sourcerepo }}

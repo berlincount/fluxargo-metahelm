@@ -1,4 +1,4 @@
-apiVersion: helm.toolkit.fluxcd.io/v2beta2
+apiVersion: helm.toolkit.fluxcd.io/{{ include "fluxargo-metahelm.flux_apiversion_helmrelease" . }}
 kind: HelmRelease
 metadata:
   name: {{ include "fluxargo-metahelm.flux_name" . }}

@@ -1,5 +1,5 @@
 {{- if or (eq .Values.sourcetype "ocirepo") (not .Values.sourcetype) -}}
-apiVersion: source.toolkit.fluxcd.io/v1beta2
+apiVersion: source.toolkit.fluxcd.io/{{ include "fluxargo-metahelm.flux_apiversion_ocirepository" . }}
 kind: OCIRepository
 metadata:
   name: {{ .Values.sourcerepo }}

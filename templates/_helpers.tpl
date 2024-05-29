@@ -30,6 +30,22 @@
 {{-   default "flux-system" .Values.flux_repo_namespace }}
 {{- end }}
 
+{{- define "fluxargo-metahelm.argocd_apiversion_application" -}}
+{{-   default "v1alpha1" .Values.argocd_apiversion_application }}
+{{- end }}
+{{- define "fluxargo-metahelm.flux_apiversion_gitrepository" -}}
+{{-   default "v1" .Values.flux_apiversion_gitrepository }}
+{{- end }}
+{{- define "fluxargo-metahelm.flux_apiversion_helmrelease" -}}
+{{-   default "v2beta2" .Values.flux_apiversion_helmrelease }}
+{{- end }}
+{{- define "fluxargo-metahelm.flux_apiversion_helmrepository" -}}
+{{-   default "v1beta2" .Values.flux_apiversion_helmrepository }}
+{{- end }}
+{{- define "fluxargo-metahelm.flux_apiversion_ocirepository" -}}
+{{-   default "v1beta2" .Values.flux_apiversion_ocirepository }}
+{{- end }}
+
 {{- define "fluxargo-metahelm.flux_repo_ocireftype" -}}
 {{-   if and (not .Values.sourcereftype) (ne .Values.sourcerevision "latest") -}}
 {{-     fail "value for .Values.sourcereftype needs to be given if revision is not 'latest'" -}}

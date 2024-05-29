@@ -1,0 +1,4 @@
+apiVersion: v2
+name: repos
+description: Repository subchart allowing their reuse
+version: 0.1.0

@@ -1,0 +1,30 @@
+{{- if or (eq .Values.sourcetype "ocirepo") (not .Values.sourcetype) -}}
+apiVersion: source.toolkit.fluxcd.io/{{ include "fluxargo-metahelm.flux_apiversion_ocirepository" . }}
+kind: OCIRepository
+metadata:
+  name: {{ .Values.sourcerepo }}
+  namespace: {{ include "fluxargo-metahelm.flux_repo_namespace" . }}
+  labels:
+    {{- include "fluxargo-metahelm.labels" . | nindent 4 }}
+spec:
+  interval: {{ include "fluxargo-metahelm.flux_repo_interval" . }}
+{{-   if .Values.flux_repo_timeout }}
+  timeout: {{ include "fluxargo-metahelm.flux_repo_timeout" . }}
+{{-   end }}
+  url: {{ .Values.sourceurl }}
+{{-   if or (.Values.sourcerevision) (.Values.sourcereftype) }}
+  ref:
+    {{ include "fluxargo-metahelm.flux_repo_ocireftype" . }}: {{ .Values.sourcerevision | quote }}
+{{-   end -}}
+{{-   if and (eq .Values.sourcereftype "semver") (.Values.sourcesemverFilter) }}
+    semverFilter: {{ .Values.sourcesemverFilter | quote }}
+{{-   end -}}
+{{-   if .Values.flux_repo_proxySecretRef }}
+  proxySecretRef:
+{{ .Values.flux_repo_proxySecretRef | toYaml | indent 4 }}
+{{-   end -}}
+{{-   if .Values.flux_repo_secretRef }}
+  secretRef:
+{{ .Values.flux_repo_secretRef | toYaml | indent 4 }}
+{{-   end -}}
+{{- end -}}

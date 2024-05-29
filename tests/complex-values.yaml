@@ -2,27 +2,30 @@ namespace: alternate_namespace
 
 namespace_create: true
 
-sourcetype: gitrepo
-sourcerepo: complex_reponame
-sourceurl: https://complex_repourl
-sourcechart: complex/chart
-sourcerevision: complex_revision
-sourcereftype: name
-sourceinterval: 7m
+repo:
+  type: gitrepo
+  repo: complex_reponame
+  url: https://complex_repourl
+  chart: complex/chart
+  revision: complex_revision
+  reftype: name
+  interval: 7m
+  flux_namespace: alternate_flux-reponamespace
+
+namespace:
+  argocd: alternate_argocd
+  flux: alternate_flux-system
 
 argocd_name: alternate_application_name
-argocd_namespace: alternate_argocd
 argocd_project: alternate_project
 argocd_destination: https://kubernetes_cluster_url
 
 flux_name: alternate_helmrelease_name
-flux_namespace: alternate_flux-system
 flux_releasename: alternate_releasename
 flux_release_interval: 123m
 flux_release_timeout: 654m
 flux_release_suspend: true
 flux_repo_create: true
-flux_repo_namespace: alternate_flux-reponamespace
 flux_repo_interval: 321m
 flux_repo_timeout: 456m
 flux_repo_secretRef:

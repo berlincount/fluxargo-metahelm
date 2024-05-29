@@ -47,24 +47,24 @@
 {{- end }}
 
 {{- define "fluxargo-metahelm.flux_repo_ocireftype" -}}
-{{-   if and (not .Values.sourcereftype) (ne .Values.sourcerevision "latest") -}}
-{{-     fail "value for .Values.sourcereftype needs to be given if revision is not 'latest'" -}}
+{{-   if and (not .Values.repo.reftype) (ne .Values.repo.revision "latest") -}}
+{{-     fail "value for .Values.repo.reftype needs to be given if revision is not 'latest'" -}}
 {{-   else -}}
-{{-     if and (and (ne .Values.sourcereftype "tag") (ne .Values.sourcereftype "semver")) (ne .Values.sourcereftype "digest") -}}
-{{-       fail "value for OCI .Values.sourcereftype has to be tag/semver/digest" -}}
+{{-     if and (and (ne .Values.repo.reftype "tag") (ne .Values.repo.reftype "semver")) (ne .Values.repo.reftype "digest") -}}
+{{-       fail "value for OCI .Values.repo.reftype has to be tag/semver/digest" -}}
 {{-     end -}}
-{{-     default "branch" .Values.sourcereftype -}}
+{{-     default "branch" .Values.repo.reftype -}}
 {{-   end -}}
 {{- end }}
 
 {{- define "fluxargo-metahelm.flux_repo_gitreftype" -}}
-{{-   if and (not .Values.sourcereftype) (and (ne .Values.sourcerevision "master") (ne .Values.sourcerevision "main")) -}}
-{{-     fail "value for .Values.sourcereftype needs to be given if revision is not 'master' or 'main'" -}}
+{{-   if and (not .Values.repo.reftype) (and (ne .Values.repo.revision "master") (ne .Values.repo.revision "main")) -}}
+{{-     fail "value for .Values.repo.reftype needs to be given if revision is not 'master' or 'main'" -}}
 {{-   else -}}
-{{-     if and (and (and (ne .Values.sourcereftype "branch") (ne .Values.sourcereftype "tag")) (and (ne .Values.sourcereftype "semver") (ne .Values.sourcereftype "name")) (ne .Values.sourcereftype "commit")) -}}
-{{-       fail "value for git .Values.sourcereftype has to be branch/tag/semver/name/commit" -}}
+{{-     if and (and (and (ne .Values.repo.reftype "branch") (ne .Values.repo.reftype "tag")) (and (ne .Values.repo.reftype "semver") (ne .Values.repo.reftype "name")) (ne .Values.repo.reftype "commit")) -}}
+{{-       fail "value for git .Values.repo.reftype has to be branch/tag/semver/name/commit" -}}
 {{-     end -}}
-{{-     default "branch" .Values.sourcereftype -}}
+{{-     default "branch" .Values.repo.reftype -}}
 {{-   end -}}
 {{- end }}
 
@@ -82,24 +82,24 @@ namespace: {{ include "fluxargo-metahelm.namespace" . }}
 {{- end }}
 
 {{- define "flugargo-metahelm.argocd_helmurl" -}}
-{{-   .Values.sourceurl | trimPrefix "oci://" -}}
+{{-   .Values.repo.url | trimPrefix "oci://" -}}
 {{- end }}
 
 {{- define "fluxargo-metahelm.argocd_source" -}}
 source:
-{{-   if eq .Values.sourcetype "gitrepo" }}
-  repoURL: {{ .Values.sourceurl }}
-  path: {{ .Values.sourcechart }}
-  targetRevision: {{ .Values.sourcerevision | quote }}
-{{-   else if eq .Values.sourcetype "helmrepo" }}
-  chart: {{ .Values.sourcechart }}
+{{-   if eq .Values.repo.type "gitrepo" }}
+  repoURL: {{ .Values.repo.url }}
+  path: {{ .Values.repo.chart }}
+  targetRevision: {{ .Values.repo.revision | quote }}
+{{-   else if eq .Values.repo.type "helmrepo" }}
+  chart: {{ .Values.repo.chart }}
   repoURL: {{ include "flugargo-metahelm.argocd_helmurl" . }}
-  targetRevision: {{ .Values.sourcerevision | quote }}
-{{-   else if or (eq .Values.sourcetype "ocirepo") (not .Values.sourcetype) }}
-  chart: {{ .Values.sourcechart }}
+  targetRevision: {{ .Values.repo.revision | quote }}
+{{-   else if or (eq .Values.repo.type "ocirepo") (not .Values.repo.type) }}
+  chart: {{ .Values.repo.chart }}
   repoURL: {{ include "flugargo-metahelm.argocd_helmurl" . }}
-{{-     if .Values.sourcerevision }}
-  targetRevision: {{ .Values.sourcerevision | quote }}
+{{-     if .Values.repo.revision }}
+  targetRevision: {{ .Values.repo.revision | quote }}
 {{-     end }}
 {{-   end }}
   helm:
@@ -113,24 +113,24 @@ source:
 {{- define "fluxargo-metahelm.flux_chart" -}}
 chart:
   spec:
-{{-   if eq .Values.sourcetype "gitrepo" }}
-    chart: {{ .Values.sourcechart }}
+{{-   if eq .Values.repo.type "gitrepo" }}
+    chart: {{ .Values.repo.chart }}
     sourceRef:
       kind: GitRepository
-      name: {{ .Values.sourcerepo }}
-{{-   else if eq .Values.sourcetype "helmrepo" }}
-    chart: {{ .Values.sourcechart }}
-    version: {{ .Values.sourcerevision | quote }}
+      name: {{ .Values.repo.name }}
+{{-   else if eq .Values.repo.type "helmrepo" }}
+    chart: {{ .Values.repo.chart }}
+    version: {{ .Values.repo.revision | quote }}
     sourceRef:
       kind: HelmRepository
-      name: {{ .Values.sourcerepo }}
-{{-   else if or (eq .Values.sourcetype "ocirepo") (not .Values.sourcetype) }}
+      name: {{ .Values.repo.name }}
+{{-   else if or (eq .Values.repo.type "ocirepo") (not .Values.repo.type) }}
     chartRef:
       kind: OCIRepository
-      name: {{ .Values.sourcerepo }}
+      name: {{ .Values.repo.name }}
 {{-   end }}
-{{-   if .Values.sourceinterval }}
-    interval: {{ .Values.sourceinterval }}
+{{-   if .Values.repo.interval }}
+    interval: {{ .Values.repo.interval }}
 {{-   end }}
 {{- end }}
 

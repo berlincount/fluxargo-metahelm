@@ -1,9 +1,0 @@
-{{- if .Values.namespace_create -}}
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: {{ include "fluxargo-metahelm.namespace" . }}
-  labels:
-    helm.sh/chart: fluxargo-metahelm-0.2.0
-    app.kubernetes.io/managed-by: Helm
-{{- end -}}

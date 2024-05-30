@@ -2,7 +2,7 @@ apiVersion: argoproj.io/{{ include "fluxargo-metahelm.argocd_apiversion_applicat
 kind: Application
 metadata:
   name: {{ include "fluxargo-metahelm.argocd_name" . }}
-  namespace: {{ include "fluxargo-metahelm.argocd_namespace" . }}
+  namespace: {{ include "fluxargo-metahelm.namespace.argocd" . }}
   labels:
     {{- include "fluxargo-metahelm.labels" . | nindent 4 }}
 spec:

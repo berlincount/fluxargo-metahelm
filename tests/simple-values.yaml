@@ -1,8 +1,9 @@
-sourcetype: helmrepo
-sourcerepo: simple
-sourceurl: https://simple_repourl
-sourcechart: simple/chart
-sourcerevision: 1.2.3
+repo:
+  type: helmrepo
+  name: simple
+  url: https://simple_repourl
+  chart: simple/chart
+  revision: 1.2.3
 
 values:
   auth:

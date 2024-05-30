@@ -1,12 +1,10 @@
-sourcetype: ocirepo
-sourcerepo: ocisemver
-sourceurl: oci://ocisemver_repourl
-sourcechart: ocisemver/chart
-sourcereftype: semver
-sourcerevision: ">= 1.2.3"
-sourcesemverFilter: ".*-rc.*"
-
-flux_repo_create: true
+repo:
+  type: ocirepo
+  url: oci://ocisemver_repourl
+  chart: ocisemver/chart
+  reftype: semver
+  revision: ">= 1.2.3"
+  semverFilter: ".*-rc.*"
 
 values:
   auth:

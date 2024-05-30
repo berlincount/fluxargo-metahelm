@@ -1,5 +1,5 @@
-sourcetype: helmrepo
-sourcerepo: novalues
-sourceurl: https://novalues_repourl
-sourcechart: novalues/chart
-sourcerevision: 1.2.3
+repo:
+  type: helmrepo
+  url: https://novalues_repourl
+  chart: novalues/chart
+  revision: 1.2.3

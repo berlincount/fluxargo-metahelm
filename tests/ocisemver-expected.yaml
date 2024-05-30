@@ -1,4 +1,13 @@
 ---
+# Source: fluxargo-metahelm/charts/namespace/templates/namespace.yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ocisemver
+  labels:
+    helm.sh/chart: fluxargo-metahelm-namespace-0.1.0
+    app.kubernetes.io/managed-by: Helm
+---
 # Source: fluxargo-metahelm/templates/application.yaml
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -6,7 +15,7 @@ metadata:
   name: ocisemver
   namespace: argocd
   labels:
-    helm.sh/chart: fluxargo-metahelm-0.2.0
+    helm.sh/chart: fluxargo-metahelm-0.3.0
     app.kubernetes.io/managed-by: Helm
 spec:
   project: default
@@ -30,7 +39,7 @@ metadata:
   name: ocisemver
   namespace: flux-system
   labels:
-    helm.sh/chart: fluxargo-metahelm-0.2.0
+    helm.sh/chart: fluxargo-metahelm-0.3.0
     app.kubernetes.io/managed-by: Helm
 spec:
   releaseName: ocisemver
@@ -46,14 +55,14 @@ spec:
     auth:
       existingSecret: ocisemver
 ---
-# Source: fluxargo-metahelm/templates/ocirepo.yaml
+# Source: fluxargo-metahelm/charts/repo/templates/ocirepo.yaml
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: OCIRepository
 metadata:
   name: ocisemver
   namespace: flux-system
   labels:
-    helm.sh/chart: fluxargo-metahelm-0.2.0
+    helm.sh/chart: fluxargo-metahelm-repo-0.1.0
     app.kubernetes.io/managed-by: Helm
 spec:
   interval: 10m

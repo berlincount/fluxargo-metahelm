@@ -8,5 +8,8 @@ tests: tests/*-expected.yaml
 	  RELEASENAME=$${FILENAME/-expected.yaml/} ; \
 	  VALUESFILE=$${FILENAME/-expected/-values} ; \
 	  set -ex ; \
-	  helm template $${RELEASENAME} . -f tests/$${VALUESFILE} | diff -u - $${TESTFILE} ; \
+	  helm template $${RELEASENAME} . -f tests/$${VALUESFILE} | diff -u10 - $${TESTFILE} ; \
 	done
+
+lint:
+	helm lint

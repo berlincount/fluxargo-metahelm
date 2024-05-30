@@ -1,4 +1,13 @@
 ---
+# Source: fluxargo-metahelm/charts/namespace/templates/namespace.yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ocisimple
+  labels:
+    helm.sh/chart: fluxargo-metahelm-namespace-0.1.0
+    app.kubernetes.io/managed-by: Helm
+---
 # Source: fluxargo-metahelm/templates/application.yaml
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -39,14 +48,14 @@ spec:
         kind: OCIRepository
         name: ocisimple
 ---
-# Source: fluxargo-metahelm/templates/ocirepo.yaml
+# Source: fluxargo-metahelm/charts/repo/templates/ocirepo.yaml
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: OCIRepository
 metadata:
   name: ocisimple
   namespace: flux-system
   labels:
-    helm.sh/chart: fluxargo-metahelm-0.3.0
+    helm.sh/chart: fluxargo-metahelm-repo-0.1.0
     app.kubernetes.io/managed-by: Helm
 spec:
   interval: 10m

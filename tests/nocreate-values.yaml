@@ -1,0 +1,6 @@
+namespace:
+  create: false
+
+repo:
+  create: false
+  url: whatever

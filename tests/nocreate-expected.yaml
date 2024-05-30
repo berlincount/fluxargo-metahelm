@@ -1,0 +1,40 @@
+---
+# Source: fluxargo-metahelm/templates/application.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nocreate
+  namespace: argocd
+  labels:
+    helm.sh/chart: fluxargo-metahelm-0.3.0
+    app.kubernetes.io/managed-by: Helm
+spec:
+  project: default
+  destination:
+    name: in-cluster
+    namespace: nocreate
+  source:
+    chart: nocreate
+    repoURL: whatever
+    helm:
+      releaseName: nocreate
+---
+# Source: fluxargo-metahelm/templates/helmrelease.yaml
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: nocreate
+  namespace: flux-system
+  labels:
+    helm.sh/chart: fluxargo-metahelm-0.3.0
+    app.kubernetes.io/managed-by: Helm
+spec:
+  releaseName: nocreate
+  targetNamespace: nocreate
+  interval: 10m
+  suspend: false
+  chart:
+    spec:
+      chartRef:
+        kind: OCIRepository
+        name: nocreate

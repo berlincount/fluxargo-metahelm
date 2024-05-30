@@ -1,11 +1,11 @@
 ---
-# Source: fluxargo-metahelm/templates/namespace.yaml
+# Source: fluxargo-metahelm/charts/namespace/templates/namespace.yaml
 apiVersion: v1
 kind: Namespace
 metadata:
   name: alternate_namespace
   labels:
-    helm.sh/chart: fluxargo-metahelm-0.3.0
+    helm.sh/chart: fluxargo-metahelm-namespace-0.1.0
     app.kubernetes.io/managed-by: Helm
 ---
 # Source: fluxargo-metahelm/templates/application.yaml
@@ -32,14 +32,14 @@ spec:
         auth:
           existingSecret: complex
 ---
-# Source: fluxargo-metahelm/templates/gitrepo.yaml
+# Source: fluxargo-metahelm/charts/repo/templates/gitrepo.yaml
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: GitRepository
 metadata:
   name: complex_reponame
   namespace: alternate_flux-reponamespace
   labels:
-    helm.sh/chart: fluxargo-metahelm-0.3.0
+    helm.sh/chart: fluxargo-metahelm-repo-0.1.0
     app.kubernetes.io/managed-by: Helm
 spec:
   interval: 321m

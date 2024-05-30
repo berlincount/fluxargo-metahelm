@@ -1,4 +1,13 @@
 ---
+# Source: fluxargo-metahelm/charts/namespace/templates/namespace.yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: novalues
+  labels:
+    helm.sh/chart: fluxargo-metahelm-namespace-0.1.0
+    app.kubernetes.io/managed-by: Helm
+---
 # Source: fluxargo-metahelm/templates/application.yaml
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -42,14 +51,14 @@ spec:
         kind: HelmRepository
         name: novalues
 ---
-# Source: fluxargo-metahelm/templates/helmrepo.yaml
+# Source: fluxargo-metahelm/charts/repo/templates/helmrepo.yaml
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
   name: novalues
   namespace: flux-system
   labels:
-    helm.sh/chart: fluxargo-metahelm-0.3.0
+    helm.sh/chart: fluxargo-metahelm-repo-0.1.0
     app.kubernetes.io/managed-by: Helm
 spec:
   provider: generic

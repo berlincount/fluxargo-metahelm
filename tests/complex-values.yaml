@@ -1,18 +1,21 @@
-namespace: alternate_namespace
-
-namespace_create: true
-
 repo:
   type: gitrepo
-  repo: complex_reponame
+  name: complex_reponame
+  namespace: alternate_flux-reponamespace
   url: https://complex_repourl
   chart: complex/chart
   revision: complex_revision
   reftype: name
   interval: 7m
-  flux_namespace: alternate_flux-reponamespace
+  flux_interval: 321m
+  flux_timeout: 456m
+  flux_secretRef:
+    name: complex_secretref
+  flux_proxySecretRef:
+    name: complex_proxysecretref
 
 namespace:
+  name: alternate_namespace
   argocd: alternate_argocd
   flux: alternate_flux-system
 
@@ -25,13 +28,6 @@ flux_releasename: alternate_releasename
 flux_release_interval: 123m
 flux_release_timeout: 654m
 flux_release_suspend: true
-flux_repo_create: true
-flux_repo_interval: 321m
-flux_repo_timeout: 456m
-flux_repo_secretRef:
-  name: complex_secretref
-flux_repo_proxySecretRef:
-  name: complex_proxysecretref
 
 values:
   auth:

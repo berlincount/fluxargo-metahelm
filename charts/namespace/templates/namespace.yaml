@@ -1,0 +1,8 @@
+{{- if .Values.create -}}
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: {{ include "namespace.name" . }}
+  labels:
+    {{- include "namespace.labels" . | nindent 4 }}
+{{- end -}}

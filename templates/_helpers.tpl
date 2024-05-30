@@ -39,10 +39,10 @@
 {{- end }}
 
 {{- define "fluxargo-metahelm.argocd_apiversion_application" -}}
-{{-   default "v1alpha1" .Values.argocd_apiversion_application }}
+{{-   default "v1alpha1" .Values.global.argocd_apiversion_application }}
 {{- end }}
 {{- define "fluxargo-metahelm.flux_apiversion_helmrelease" -}}
-{{-   default "v2beta2" .Values.flux_apiversion_helmrelease }}
+{{-   default "v2beta2" .Values.global.flux_apiversion_helmrelease }}
 {{- end }}
 
 {{- define "fluxargo-metahelm.argocd_project" -}}

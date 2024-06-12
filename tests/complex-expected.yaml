@@ -15,7 +15,7 @@ metadata:
   name: alternate_application_name
   namespace: alternate_argocd
   labels:
-    helm.sh/chart: fluxargo-metahelm-0.3.0
+    helm.sh/chart: fluxargo-metahelm-0.3.2
     app.kubernetes.io/managed-by: Helm
 spec:
   project: alternate_project
@@ -59,7 +59,7 @@ metadata:
   name: alternate_helmrelease_name
   namespace: alternate_flux-system
   labels:
-    helm.sh/chart: fluxargo-metahelm-0.3.0
+    helm.sh/chart: fluxargo-metahelm-0.3.2
     app.kubernetes.io/managed-by: Helm
 spec:
   releaseName: alternate_releasename

@@ -15,7 +15,7 @@ metadata:
   name: ocisemver
   namespace: argocd
   labels:
-    helm.sh/chart: fluxargo-metahelm-0.3.0
+    helm.sh/chart: fluxargo-metahelm-0.3.2
     app.kubernetes.io/managed-by: Helm
 spec:
   project: default
@@ -39,7 +39,7 @@ metadata:
   name: ocisemver
   namespace: flux-system
   labels:
-    helm.sh/chart: fluxargo-metahelm-0.3.0
+    helm.sh/chart: fluxargo-metahelm-0.3.2
     app.kubernetes.io/managed-by: Helm
 spec:
   releaseName: ocisemver

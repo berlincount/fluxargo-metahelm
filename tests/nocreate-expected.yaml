@@ -6,7 +6,7 @@ metadata:
   name: nocreate
   namespace: argocd
   labels:
-    helm.sh/chart: fluxargo-metahelm-0.3.2
+    helm.sh/chart: fluxargo-metahelm-0.3.3
     app.kubernetes.io/managed-by: Helm
 spec:
   project: default
@@ -14,6 +14,7 @@ spec:
     name: in-cluster
     namespace: nocreate
   source:
+    # FIXME: OCI support in Argo CD is a bit more complicated
     chart: nocreate
     repoURL: whatever
     helm:
@@ -26,7 +27,7 @@ metadata:
   name: nocreate
   namespace: flux-system
   labels:
-    helm.sh/chart: fluxargo-metahelm-0.3.2
+    helm.sh/chart: fluxargo-metahelm-0.3.3
     app.kubernetes.io/managed-by: Helm
 spec:
   releaseName: nocreate

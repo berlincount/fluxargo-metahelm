@@ -5,7 +5,7 @@ kind: Namespace
 metadata:
   name: ocisimple
   labels:
-    helm.sh/chart: fluxargo-metahelm-namespace-0.1.0
+    helm.sh/chart: fluxargo-metahelm-namespace-0.3.3
     app.kubernetes.io/managed-by: Helm
 ---
 # Source: fluxargo-metahelm/templates/application.yaml
@@ -15,7 +15,7 @@ metadata:
   name: ocisimple
   namespace: argocd
   labels:
-    helm.sh/chart: fluxargo-metahelm-0.3.2
+    helm.sh/chart: fluxargo-metahelm-0.3.3
     app.kubernetes.io/managed-by: Helm
 spec:
   project: default
@@ -23,6 +23,7 @@ spec:
     name: in-cluster
     namespace: ocisimple
   source:
+    # FIXME: OCI support in Argo CD is a bit more complicated
     chart: ocisimple/chart
     repoURL: ocisimple_repourl
     helm:
@@ -35,7 +36,7 @@ metadata:
   name: ocisimple
   namespace: flux-system
   labels:
-    helm.sh/chart: fluxargo-metahelm-0.3.2
+    helm.sh/chart: fluxargo-metahelm-0.3.3
     app.kubernetes.io/managed-by: Helm
 spec:
   releaseName: ocisimple
@@ -55,7 +56,7 @@ metadata:
   name: ocisimple
   namespace: flux-system
   labels:
-    helm.sh/chart: fluxargo-metahelm-repo-0.1.0
+    helm.sh/chart: fluxargo-metahelm-repo-0.3.3
     app.kubernetes.io/managed-by: Helm
 spec:
   interval: 10m

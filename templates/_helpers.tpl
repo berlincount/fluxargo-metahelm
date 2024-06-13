@@ -77,6 +77,7 @@ source:
   repoURL: {{ include "fluxargo-metahelm.argocd_helmurl" . }}
   targetRevision: {{ .Values.repo.revision | quote }}
 {{-   else if or (eq .Values.repo.type "ocirepo") (not .Values.repo.type) }}
+  # FIXME: OCI support in Argo CD is a bit more complicated
   chart: {{ include "fluxargo-metahelm.repo.chart" . }}
   repoURL: {{ include "fluxargo-metahelm.argocd_helmurl" . }}
 {{-     if .Values.repo.revision }}

@@ -5,7 +5,7 @@ kind: Namespace
 metadata:
   name: ocisemver
   labels:
-    helm.sh/chart: fluxargo-metahelm-namespace-0.4.0
+    helm.sh/chart: fluxargo-metahelm-namespace-0.4.1
     app.kubernetes.io/managed-by: Helm
 ---
 # Source: fluxargo-metahelm/templates/application.yaml
@@ -15,7 +15,7 @@ metadata:
   name: ocisemver
   namespace: argocd
   labels:
-    helm.sh/chart: fluxargo-metahelm-0.4.0
+    helm.sh/chart: fluxargo-metahelm-0.4.1
     app.kubernetes.io/managed-by: Helm
 spec:
   project: default
@@ -40,7 +40,7 @@ metadata:
   name: ocisemver
   namespace: flux-system
   labels:
-    helm.sh/chart: fluxargo-metahelm-0.4.0
+    helm.sh/chart: fluxargo-metahelm-0.4.1
     app.kubernetes.io/managed-by: Helm
 spec:
   releaseName: ocisemver
@@ -63,7 +63,7 @@ metadata:
   name: ocisemver
   namespace: flux-system
   labels:
-    helm.sh/chart: fluxargo-metahelm-repo-0.4.0
+    helm.sh/chart: fluxargo-metahelm-repo-0.4.1
     app.kubernetes.io/managed-by: Helm
 spec:
   interval: 10m

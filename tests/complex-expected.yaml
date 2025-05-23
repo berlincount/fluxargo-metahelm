@@ -5,7 +5,7 @@ kind: Namespace
 metadata:
   name: alternate_namespace
   labels:
-    helm.sh/chart: fluxargo-metahelm-namespace-0.4.0
+    helm.sh/chart: fluxargo-metahelm-namespace-0.4.1
     app.kubernetes.io/managed-by: Helm
 ---
 # Source: fluxargo-metahelm/templates/application.yaml
@@ -15,7 +15,7 @@ metadata:
   name: alternate_application_name
   namespace: alternate_argocd
   labels:
-    helm.sh/chart: fluxargo-metahelm-0.4.0
+    helm.sh/chart: fluxargo-metahelm-0.4.1
     app.kubernetes.io/managed-by: Helm
 spec:
   project: alternate_project
@@ -39,7 +39,7 @@ metadata:
   name: complex_reponame
   namespace: alternate_flux-reponamespace
   labels:
-    helm.sh/chart: fluxargo-metahelm-repo-0.4.0
+    helm.sh/chart: fluxargo-metahelm-repo-0.4.1
     app.kubernetes.io/managed-by: Helm
 spec:
   interval: 321m
@@ -59,7 +59,7 @@ metadata:
   name: alternate_helmrelease_name
   namespace: alternate_flux-system
   labels:
-    helm.sh/chart: fluxargo-metahelm-0.4.0
+    helm.sh/chart: fluxargo-metahelm-0.4.1
     app.kubernetes.io/managed-by: Helm
 spec:
   releaseName: alternate_releasename

@@ -2,13 +2,13 @@ apiVersion: v2
 name: fluxargo-metahelm
 description: Meta Chart that creates Argo-CD Application and Flux HelmRelease objects
 type: application
-version: 0.4.0
+version: 0.4.1
 dependencies:
   - name: fluxargo-metahelm-namespace
     alias: namespace
-    version: 0.4.0
+    version: 0.4.1
     condition: namespace.create
   - name: fluxargo-metahelm-repo
     alias: repo
-    version: 0.4.0
+    version: 0.4.1
     condition: repo.create

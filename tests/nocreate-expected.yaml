@@ -6,7 +6,7 @@ metadata:
   name: nocreate
   namespace: argocd
   labels:
-    helm.sh/chart: fluxargo-metahelm-0.4.0
+    helm.sh/chart: fluxargo-metahelm-0.4.1
     app.kubernetes.io/managed-by: Helm
 spec:
   project: default
@@ -27,7 +27,7 @@ metadata:
   name: nocreate
   namespace: flux-system
   labels:
-    helm.sh/chart: fluxargo-metahelm-0.4.0
+    helm.sh/chart: fluxargo-metahelm-0.4.1
     app.kubernetes.io/managed-by: Helm
 spec:
   releaseName: nocreate

@@ -5,7 +5,7 @@ kind: Namespace
 metadata:
   name: valuesfrom
   labels:
-    helm.sh/chart: fluxargo-metahelm-namespace-0.4.0
+    helm.sh/chart: fluxargo-metahelm-namespace-0.4.1
     app.kubernetes.io/managed-by: Helm
 ---
 # Source: fluxargo-metahelm/templates/application.yaml
@@ -15,7 +15,7 @@ metadata:
   name: valuesfrom
   namespace: argocd
   labels:
-    helm.sh/chart: fluxargo-metahelm-0.4.0
+    helm.sh/chart: fluxargo-metahelm-0.4.1
     app.kubernetes.io/managed-by: Helm
 spec:
   project: default
@@ -37,7 +37,7 @@ metadata:
   name: valuesfrom
   namespace: flux-system
   labels:
-    helm.sh/chart: fluxargo-metahelm-0.4.0
+    helm.sh/chart: fluxargo-metahelm-0.4.1
     app.kubernetes.io/managed-by: Helm
 spec:
   releaseName: valuesfrom
@@ -66,7 +66,7 @@ metadata:
   name: valuesfrom
   namespace: flux-system
   labels:
-    helm.sh/chart: fluxargo-metahelm-repo-0.4.0
+    helm.sh/chart: fluxargo-metahelm-repo-0.4.1
     app.kubernetes.io/managed-by: Helm
 spec:
   provider: generic

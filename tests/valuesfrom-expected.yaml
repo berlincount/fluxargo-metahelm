@@ -3,7 +3,7 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: gittag
+  name: valuesfrom
   labels:
     helm.sh/chart: fluxargo-metahelm-namespace-0.4.0
     app.kubernetes.io/managed-by: Helm
@@ -12,7 +12,7 @@ metadata:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: gittag
+  name: valuesfrom
   namespace: argocd
   labels:
     helm.sh/chart: fluxargo-metahelm-0.4.0
@@ -21,53 +21,51 @@ spec:
   project: default
   destination:
     name: in-cluster
-    namespace: gittag
+    namespace: valuesfrom
   source:
-    repoURL: https://gittag_repourl
-    path: gittag/chart
+    chart: valuesfrom/chart
+    repoURL: https://valuesfrom_repourl
     targetRevision: "1.2.3"
     helm:
-      releaseName: gittag
-      valuesObject:
-        auth:
-          existingSecret: gittag
----
-# Source: fluxargo-metahelm/charts/repo/templates/gitrepo.yaml
-apiVersion: source.toolkit.fluxcd.io/v1
-kind: GitRepository
-metadata:
-  name: gittag
-  namespace: flux-system
-  labels:
-    helm.sh/chart: fluxargo-metahelm-repo-0.4.0
-    app.kubernetes.io/managed-by: Helm
-spec:
-  interval: 15m
-  timeout: 5m
-  ref:
-    tag: "1.2.3"
-  url: https://gittag_repourl
+      releaseName: valuesfrom
+      # FIXME: external valuesFrom broken just now. oops.
 ---
 # Source: fluxargo-metahelm/templates/helmrelease.yaml
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
-  name: gittag
+  name: valuesfrom
   namespace: flux-system
   labels:
     helm.sh/chart: fluxargo-metahelm-0.4.0
     app.kubernetes.io/managed-by: Helm
 spec:
-  releaseName: gittag
-  targetNamespace: gittag
+  releaseName: valuesfrom
+  targetNamespace: valuesfrom
   interval: 10m
   suspend: false
   chart:
     spec:
-      chart: gittag/chart
+      chart: valuesfrom/chart
+      version: "1.2.3"
       sourceRef:
-        kind: GitRepository
-        name: gittag
-  values:
-    auth:
-      existingSecret: gittag
+        kind: HelmRepository
+        name: valuesfrom
+  valuesFrom:
+    - kind: ConfigMap
+      name: valuesfrom
+      valuesKey: values-env.yaml
+---
+# Source: fluxargo-metahelm/charts/repo/templates/helmrepo.yaml
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: valuesfrom
+  namespace: flux-system
+  labels:
+    helm.sh/chart: fluxargo-metahelm-repo-0.4.0
+    app.kubernetes.io/managed-by: Helm
+spec:
+  provider: generic
+  interval: 10m
+  url: https://valuesfrom_repourl

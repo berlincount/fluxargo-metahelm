@@ -1,4 +1,4 @@
 apiVersion: v2
 name: fluxargo-metahelm-repo
 description: Repository subchart allowing their reuse
-version: 0.3.3
+version: 0.4.0

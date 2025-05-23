@@ -89,6 +89,9 @@ source:
 {{-   if .Values.values }}
     valuesObject:
 {{-     toYaml .Values.values | nindent 6 }}
+{{-   else if .Values.valuesFrom }}
+    # FIXME: external valuesFrom broken just now. oops.
+{{-   else }}
 {{-   end }}
 {{- end }}
 
@@ -120,8 +123,10 @@ chart:
 {{- define "fluxargo-metahelm.flux_values" -}}
 {{-   if .Values.values -}}
 values:
+{{-     toYaml .Values.values | nindent 2 }}
 {{-   else if .Values.valuesFrom -}}
-valuesFrom: {{ .Values.valuesFrom }}
+valuesFrom:
+{{-     toYaml .Values.valuesFrom | nindent 2 }}
 {{-   end }}
 {{- end }}
 

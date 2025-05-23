@@ -1,0 +1,11 @@
+repo:
+  type: helmrepo
+  name: valuesfrom
+  url: https://valuesfrom_repourl
+  chart: valuesfrom/chart
+  revision: 1.2.3
+
+valuesFrom:
+  - kind: ConfigMap
+    name: valuesfrom
+    valuesKey: values-env.yaml

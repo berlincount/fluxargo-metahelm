@@ -120,7 +120,8 @@ chart:
 {{- define "fluxargo-metahelm.flux_values" -}}
 {{-   if .Values.values -}}
 values:
-{{-     toYaml .Values.values | nindent 2 }}
+{{-   else if .Values.valuesFrom -}}
+valuesFrom: {{ .Values.valuesFrom }}
 {{-   end }}
 {{- end }}
 

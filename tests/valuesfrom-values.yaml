@@ -9,3 +9,6 @@ valuesFrom:
   - kind: ConfigMap
     name: valuesfrom
     valuesKey: values-env.yaml
+  - kind: ConfigMap
+    name: fromvalues
+    valuesKey: values-nev.yaml

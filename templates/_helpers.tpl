@@ -126,7 +126,7 @@ values:
 {{-     toYaml .Values.values | nindent 2 }}
 {{-   else if .Values.valuesFrom -}}
 valuesFrom:
-{{-     toYaml .Values.valuesFrom | nindent 2 }}
+{{- toYaml .Values.valuesFrom | nindent 2 }}
 {{-   end }}
 {{- end }}
 
